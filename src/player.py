@@ -1,10 +1,11 @@
+# player.py
+
 from .hand import Hand
-
-
 class Player:
     def __init__(self, name):
         self.name = name
         self.hand = Hand()  # Assuming you have a Hand class that contains the player's cards
+        self.current_bet = 0  # Initialize current_bet for each player
 
     def calculate_total(self):
         total = 0

@@ -1,3 +1,5 @@
+# exceptions
+# 
 class Exceptions:
     """Base class for all exceptions in the game."""
     pass

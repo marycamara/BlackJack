@@ -1,3 +1,6 @@
+# deck.py
+# The deck of cards. 
+
 import random
 from .card import Card
 

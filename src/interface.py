@@ -1,3 +1,6 @@
+# interface.py
+# Blackjack interface
+
 from tabulate import tabulate
 from colorama import Fore, Style
 from .hand import Hand
@@ -30,6 +33,7 @@ class Interface:
                 return num_players
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
+                
 
     def prompt_player_name(self, player_num):
         """Prompts the user to input a player's name."""
@@ -70,6 +74,33 @@ class Interface:
         while action not in ['h', 's']:
             action = input(f"{player_name}, do you want to (h)it or (s)tand? ").lower()
         return action
+    
+    def prompt_bet(self, player_name, current_balance):
+        """ Prompts the player to place a bet"""
+        while True:
+            try:
+                bet = int(input(f"{player_name}, you have £{current_balance}. How much would you like to bet? £"))
+                if bet <= 0:
+                    print("Please enter a bet greater than zero")
+                elif bet > current_balance:
+                    print(f"You cannot bet more than your current balance of £{current_balance}.")
+                else:
+                    return bet
+            except ValueError:
+                print("Invalid input. Please enter a valid bet amount.")
+
+    
+    def prompt_continue(self):
+        """ Ask the player if they want to continue playing"""
+        while True:
+            user_input = input(Fore.YELLOW + "Do you want to play another round? (y/n): " + Style.RESET_ALL).lower()
+            if user_input == 'y':
+                return True
+            elif user_input == 'n':
+                return False
+            else:
+                print("Invalid input. Please enter 'y' to continue or 'n' to quit." )
+            
 
     def display_final_results(self, players_info):
         """Displays the final results in a table format, ranked by total score."""
@@ -87,24 +118,4 @@ class Interface:
             hand_str = ', '.join([f"{card.rank} of {self.card_symbols.get(card.suit, card.suit)}" for card in hand.cards])
             table_rows.append([rank, name, hand_str, total])
 
-        # Print the final result in a table format
-        print(Fore.RED + "\n" + "=" * 40 + Style.RESET_ALL)  # Clear separator before final results
-        print(Fore.RED + "Final Results:" + Style.RESET_ALL)
-        print(tabulate(table_rows, headers=table_headers, tablefmt='fancy_grid', stralign='center'))
-        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Clear separator after final results
-
-    def display_deck_status(self, remaining_cards):
-        """Displays the number of remaining cards in the deck."""
-        print(Fore.RED + f"Remaining cards in deck: {remaining_cards}" + Style.RESET_ALL)
-
-    def display_shuffling(self):
-        """Displays shuffling animation."""
-        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Add a separator for clarity
-        print(Fore.RED + "Shuffling deck..." + Style.RESET_ALL)
-        time.sleep(1)  # Simulate time for shuffling
-        print(Fore.RED + "Deck shuffled!" + Style.RESET_ALL)
-        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Clear separator after shuffling
-
-    def draw_card(self):
-        """Displays the drawing of a card in red."""
-        print(Fore.RED + "Drawing a card..." + Style.RESET_ALL)
+        # Print the final r

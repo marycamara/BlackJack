@@ -118,4 +118,24 @@ class Interface:
             hand_str = ', '.join([f"{card.rank} of {self.card_symbols.get(card.suit, card.suit)}" for card in hand.cards])
             table_rows.append([rank, name, hand_str, total])
 
-        # Print the final r
+        # Print the final result in a table format
+        print(Fore.RED + "\n" + "=" * 40 + Style.RESET_ALL)  # Clear separator before final results
+        print(Fore.RED + "Final Results:" + Style.RESET_ALL)
+        print(tabulate(table_rows, headers=table_headers, tablefmt='fancy_grid', stralign='center'))
+        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Clear separator after final results
+
+    def display_deck_status(self, remaining_cards):
+        """Displays the number of remaining cards in the deck."""
+        print(Fore.RED + f"Remaining cards in deck: {remaining_cards}" + Style.RESET_ALL)
+
+    def display_shuffling(self):
+        """Displays shuffling animation."""
+        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Add a separator for clarity
+        print(Fore.RED + "Shuffling deck..." + Style.RESET_ALL)
+        time.sleep(1)  # Simulate time for shuffling
+        print(Fore.RED + "Deck shuffled!" + Style.RESET_ALL)
+        print(Fore.RED + "=" * 40 + Style.RESET_ALL)  # Clear separator after shuffling
+
+    def draw_card(self):
+        """Displays the drawing of a card in red."""
+        print(Fore.RED + "Drawing a card..." + Style.RESET_ALL)

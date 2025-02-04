@@ -8,7 +8,7 @@ class BlackjackMenu:
     
     def display_menu(self):
         while self.running:
-            print("\n===================Main Menu===================")
+            print("\n=================== Main Menu ===================")
             print("1. Start Game")
             print("2. View Rules")
             print("3. Exit")

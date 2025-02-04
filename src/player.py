@@ -30,3 +30,5 @@ class Player:
     def is_busted(self):
         # Returns True if the player's total exceeds 21 (busted)
         return self.calculate_total() > 21
+
+

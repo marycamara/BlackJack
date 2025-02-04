@@ -5,6 +5,7 @@ from src.player import Player
 from src.ai_player import AIPlayer
 from src.betting_system import BettingSystem
 
+
 class Game:
     def __init__(self, max_players=4, starting_balance=500):
         self.deck = Deck()

@@ -83,8 +83,15 @@ class Game:
                 print(f"AIPlayer places a bet of £{bet}.")
             else:
                 while True:
-                    try:
-                        current_balance = self.betting_system[player.name].get_balance()
+                    current_balance = self.betting_system[player.name].get_balance()
+                        
+                    # Prevent betting if balance is zero
+                    if current_balance == 0:
+                        print(f"{player.name}, you have run out of funds and cannot place any more bets.")
+                        break
+                    
+                    
+                    try:      
                         bet = int(self.interface.prompt_bet(player.name, current_balance))
                         if bet > current_balance:
                             print(f"Insufficient balance! You only have £{current_balance}.")
@@ -122,6 +129,7 @@ class Game:
             player_name = self.interface.prompt_player_name(i)
             self.players.append(Player(player_name))
             self.betting_system[player_name] = BettingSystem(self.starting_balance)
+            
         
         # Add one AI player at the end with a name
         self.players.append(AIPlayer("AI Dealer"))
@@ -140,7 +148,16 @@ class Game:
                 balance = self.betting_system[player.name].get_balance()
                 print(f"{player.name}'s balance: £{balance}")
                 
-            # check if players want to continue
+            # Remove players who have no money left
+            self.players = [player for player in self.players if self.betting_system[player_name].get_balance() > 0] 
+                
+            
+            # If only the AI dealer remains, end the game
+            if len(self.players) == 1 and isinstance (self.players[0], AIPlayer):
+                print("All players are out of money. Game over!")
+                break
+            
+            # Check if players want to continue
             cont = self.interface.prompt_continue()
             if not cont:
                 print("Thanks for playing!")

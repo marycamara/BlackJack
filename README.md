@@ -17,8 +17,7 @@ A command-line Blackjack game implementation in Python.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/marycamara/BBC-Software-Engineer-Graduate-Scheme-2025-BlackJack
-cd BBC-Software-Engineer-Graduate-Scheme-2025-BlackJack
+https://github.com/marycamara/BlackJack.git
 ```
 
 ### 2. Set Up Environment

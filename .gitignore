@@ -1,3 +1,4 @@
+# Backend ignore
 # Python bytecode files
 *.pyc
 *.pyo
@@ -56,3 +57,26 @@ build/
   
 # Secrets files
 *.secrets
+
+# ///// Frontend ignore
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.env/
+
+# Flask specific
+instance/
+*.log
+
+# Dependency directories
+*.egg-info
+*.dist-info
+
+# OS generated files
+.DS_Store
+Thumbs.db
+

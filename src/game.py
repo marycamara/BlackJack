@@ -61,6 +61,10 @@ class Game:
                 elif action == 's':  # AI stands
                     print("AI stands.")
                     break  # Exit loop after standing
+                
+                elif action == 'd': # Player chooses to double down 
+                    self.double_down()
+                    break # End turn immediately after doubling down
 
             else:  # For human players
                 action = self.interface.prompt_action(player.name)
@@ -74,6 +78,29 @@ class Game:
                 elif action == 's':  # Player stands
                     print(f"{player.name} stands.")
                     break  # Exit loop after standing
+    
+    def double_down(self, player):
+        """Handles the double down action, doubling the bet and drawing one card. """
+        current_balance = self.betting_system[player.name].get_balance()
+        
+        # Ensures players has enough balance to double their bet
+        if player.current_bet * 2 > current_balance:
+            print(f"{player.name}, you don't have enough funds to double down.")
+            return
+        
+        # Deduct addtional bet amount
+        self.betting_system[player.name].place_bet(player.current_bet)
+        player.current_bet *= 2 #Double the bet
+        
+        # Player gets only one more card
+        card = self.draw.draw_card()
+        player.hand.add_card(card)
+        print(f"{player.name} doubles down and recieves {card}.")
+        
+        # If player busts, display message
+        if player.is_busted():
+            self.interface.display_busted(player.name)
+    
 
     def place_bet(self):
         """Handles bet placement for all players, prompting at the beginning of the game."""

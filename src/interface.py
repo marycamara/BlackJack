@@ -89,6 +89,15 @@ class Interface:
             except ValueError:
                 print("Invalid input. Please enter a valid bet amount.")
 
+    def prompt_action(self, player_name):
+        """Prompt players for action (hit, stand, double down)"""
+        while True:
+            action = input(f"{player_name} , choose an action - (H)it, (S)tand, (D)ouble Down: ").strip().lower()
+            if action in['h', 's', 'd']: # Allow d for doubling down
+                return action
+            print("Invalid choice. Please enter H, S, or D")
+        
+    
     
     def prompt_continue(self):
         """ Ask the player if they want to continue playing"""

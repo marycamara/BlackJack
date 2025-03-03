@@ -93,7 +93,7 @@ class Game:
         player.current_bet *= 2 #Double the bet
         
         # Player gets only one more card
-        card = self.draw.draw_card()
+        card = self.deck.draw_card()
         player.hand.add_card(card)
         print(f"{player.name} doubles down and recieves {card}.")
         
@@ -106,7 +106,7 @@ class Game:
         """Handles bet placement for all players, prompting at the beginning of the game."""
         for player in self.players:
             if isinstance(player, AIPlayer):
-                bet = 500  # Fixed bet for AI (can be dynamic based on balance)
+                bet = min(500, self.betting_system["AI Dealer"].get_balance())  # Fixed bet for AI (can be dynamic based on balance)
                 print(f"AIPlayer places a bet of £{bet}.")
             else:
                 while True:
@@ -141,6 +141,13 @@ class Game:
                 winnings = player.current_bet * 2
                 print(f"{player.name} wins £{winnings}!")
                 self.betting_system[player.name].update_balance(winnings)
+                
+            # AI Dealer's winnings are updated 
+            elif isinstance(player, AIPlayer) and not player.is_busted():
+                winnings = player.current_bet * 2
+                print(f"AI Dealer wins £{winnings}!")
+                self.betting_system["AI Dealer"].update_balance(winnings)
+            
             else:
                 print(f"{player.name} loses their bet of £{player.current_bet}.")
                 self.betting_system[player.name].update_balance(-player.current_bet)
@@ -176,7 +183,7 @@ class Game:
                 print(f"{player.name}'s balance: £{balance}")
                 
             # Remove players who have no money left
-            self.players = [player for player in self.players if self.betting_system[player_name].get_balance() > 0] 
+            self.players = [player for player in self.players if self.betting_system[player.name].get_balance() > 0] 
                 
             
             # If only the AI dealer remains, end the game

@@ -8,7 +8,7 @@ class BettingSystem:
         
     def place_bet(self, amount):
         if amount > self.balance:
-            print("Insuffient funds! You only have £{self.balance}.")
+            print(f"Insuffient funds! You only have £{self.balance}.")
             return False
         
         elif amount <=0:
@@ -21,7 +21,7 @@ class BettingSystem:
     
     def update_balance(self, amount):
         self.balance += amount
-        print(f"Your balance is now{self.balance}.")
+        print(f"Your balance is now £{self.balance}.")
         
     def get_balance(self):
         return self.balance

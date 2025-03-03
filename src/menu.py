@@ -36,7 +36,7 @@ class BlackjackMenu:
                 
     def show_rules(self):
         print("==== BlackJack Rules ====")
-        print("1.Try to get as close to 21 as possible without exceeding it. ")
+        print("1. Try to get as close to 21 as possible without exceeding it. ")
         print("2. Face cards are worth 10, Aces are worth 1 or 11.")
         print("3. Players can hit (draw a card) or stand (keep their hand).")
         print("4. The dealer must hit on 16 and stand on 17.")
